@@ -1,11 +1,40 @@
-#include "mainwindow.h"
+#include <iostream>
+#include "windows.h"
+using namespace std;
 
-#include <QApplication>
+char Map [20][20] = {
+    "###################",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#                 #",
+    "#         W       #",
+    "###################"
+};
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+bool endgame = false;
+int gamespeed = 400;
+
+int man(){
+
+    while(endgame == false){
+        system("cls");
+        for(int y = 0; y < 20; y++){
+            cout << Map[y];
+        }
+    }
+    return 0;
 }
