@@ -1,40 +1,13 @@
+#include "players.h"
+#include "players.cpp"
+#include "game.h"
+
+#include <stdlib.h>
 #include <iostream>
-#include "windows.h"
 using namespace std;
+#include <QCoreApplication>
 
-char Map [20][20] = {
-    "###################",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#                 #",
-    "#         W       #",
-    "###################"
+int main()
+{
+
 };
-
-bool endgame = false;
-int gamespeed = 400;
-
-int man(){
-
-    while(endgame == false){
-        system("cls");
-        for(int y = 0; y < 20; y++){
-            cout << Map[y];
-        }
-    }
-    return 0;
-}

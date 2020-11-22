@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>resources/alien.png</file>
+        <file>resources/bullet.png</file>
+        <file>resources/player.png</file>
+        <file>resources/Background.png</file>
+    </qresource>
+</RCC>
