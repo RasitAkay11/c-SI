@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <iostream>
+#include "players.h"
 #include <QtGui/QKeyEvent>
 #include <QWidget>
 
@@ -20,10 +21,12 @@ private:
     int x;
     int Score;
     int HighScore;
-    int Lives;
+    int timer;
     bool GameStarted;
     bool GameOver;
     bool GamePaused;
+    bool paused;
+    Player *player;
 };
 
 #endif // GAME_H
