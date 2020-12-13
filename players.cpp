@@ -1,6 +1,7 @@
 #include "players.h"
 #include <iostream>
 #include <QRect>
+#include <QDebug>
 
 
 Player::Player(int x, int y){
@@ -11,28 +12,31 @@ Player::Player(int x, int y){
     ship.moveTo(x,y);
 }
 
-void Player::Move(){
-    QRect rect;
-    rect = image.rect();
-    int x = ship().x;
-    int y = ship().y;
-    switch (dir) {
-        case Player::DOWN:
-            y += 7;
-        break;
-        case Player::UP:
-            y -= 7;
-        break;
-        case Player::LEFT:
-            x -=7;
-        break;
-        case Player::RIGHT:
-            x +=7;
-        break;
+void Player::keyPressEvent(QKeyEvent *event)
+{
+
+    qDebug() << "MyRect knows that you pressed a key";
+    /*if(event->key() == Qt::Key_Left){
+        setPos(x()-10,y());
     }
-    rect.moveTo(x, y);
+    else if(event->key() == Qt::Key_Right){
+        setPos(x()+10,y());
+    }
+    else if(event->key() == Qt::Key_Space){
+        Shoot();
+    }*/
+}
+
+QRect Player::getRect()
+{
+    ;
+}
+
+void Player::setRect(int, int, int, int)
+{
+    ;
 }
 
 void Player::Shoot(){
-
+    qDebug() << "anan";
 }

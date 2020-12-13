@@ -1,6 +1,11 @@
 #include "bullet.h"
 
-Bullet::Bullet(int x, int y) :  destroyed(false){
+Bullet::Bullet(int x, int y) :  destroyed(false){ //Member initalization stuff behind semicolon
+    ;
+}
+
+Bullet::~Bullet()
+{
     ;
 }
 

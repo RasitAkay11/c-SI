@@ -2,17 +2,20 @@
 #define GAME_H
 #include <iostream>
 #include "players.h"
+#include "aliens.h"
+
 #include <QtGui/QKeyEvent>
 #include <QWidget>
 
 class Game : public QWidget{
     Q_OBJECT
 public:
-  Game(QWidget *parent = nullptr); /* 14 : useful member function , 44 : NULLPTR */
-  ~Game(); /* 12 : Decunstructor */
+  Game(QWidget *parent = nullptr);
+  ~Game();
 
 protected:
-    void KeyPressEvent(QKeyEvent *Event);
+    void paintEvent(QPaintEvent *event);
+    //void KeyPressEvent(QKeyEvent *Event);
     void StartGame();
     void StartGame(int);
     void PauseGame();
@@ -22,10 +25,12 @@ private:
     int Score;
     int HighScore;
     int timer;
+    bool NewHigh;
     bool GameStarted;
     bool GameOver;
     bool GamePaused;
     bool paused;
+    Aliens *aliens;
     Player *player;
 };
 

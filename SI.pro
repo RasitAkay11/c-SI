@@ -9,9 +9,12 @@ CONFIG -= app_bundle
 
 SOURCES += \
         aliens.cpp \
+        bart.cpp \
         bullet.cpp \
         game.cpp \
         main.cpp \
+        mikail.cpp \
+        osman.cpp \
         players.cpp
 
 # Default rules for deployment.
@@ -21,8 +24,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     aliens.h \
+    bart.h \
     bullet.h \
     game.h \
+    mikail.h \
+    osman.h \
     players.h
 
 RESOURCES += \
