@@ -1,31 +1,18 @@
 #ifndef players_H
 #define players_H
 
+#include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
-#include <QImage>
-#include <QRect>
-#include <stdio.h>
-#include <stdlib.h>
-#include <list>
+#include <QObject>
 
-class Player: public QGraphicsItem{
-public:
-    Player(int, int);
-    ~Player(); /* 12 : Deconstructor */
 
+class Player:public QObject, public QGraphicsPixmapItem{
+    Q_OBJECT
 public:
-    int Lives;
+    Player(QGraphicsItem * parent = 0);
     void keyPressEvent(QKeyEvent * event);
-    QRect getRect();
-    void setRect(int, int, int, int);
-    QImage image;
-    int x, y;
-
-    void Shoot();
-
-
-  private:
-    unsigned int numQueuedSegments;
+public slots:
+    void spawn();
 };
 
 

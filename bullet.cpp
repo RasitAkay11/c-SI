@@ -1,30 +1,48 @@
 #include "bullet.h"
+#include "enemy.h"
+#include "game.h"
+#include <QTimer>
+#include <QGraphicsScene>
+#include <QList>
 
-Bullet::Bullet(int x, int y) :  destroyed(false){ //Member initalization stuff behind semicolon
-    ;
-}
+extern Game * game; //external global object
 
-Bullet::~Bullet()
+Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    ;
+    setPixmap(QPixmap(":/images/images/bullet.png"));
+
+    QTimer * timer = new QTimer(); //connect
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+
+    timer->start(50);
 }
 
-bool Bullet::isDestroyed(){
-    return destroyed;
-}
+void Bullet::move()
+{
+    // check if bullet collides with enemy
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for(int i = 0, n = colliding_items.size(); i<n; i++){
+        if(typeid(*(colliding_items[i])) == typeid(Enemy)){
+            //increase the score
+            game->score->increase();
 
-void Bullet::setDestroyed(bool destr){
-    destroyed = destr;
-}
+            //remove them both
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
 
-QRect Bullet::getRect(){
-    return rect;
-}
+            //mem deleting
+            delete colliding_items[i];
+            delete this;
+            return;
+        }
+    }
 
-void Bullet::setRect(QRect rct){
-    rect = rct;
-}
+    //move bullet up
+    setPos(x(), y()-10);
 
-QImage &Bullet::getImage(){
-    return image;
+    //remove bullet after its off the screen to reduce memory
+    if(pos().y() < 0){
+        scene()->removeItem(this);
+        delete this;
+    }
 }

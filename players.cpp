@@ -1,42 +1,40 @@
 #include "players.h"
-#include <iostream>
-#include <QRect>
+#include "bullet.h"
+#include "enemy.h"
 #include <QDebug>
+#include <QKeyEvent>
+#include <QGraphicsScene>
 
-
-Player::Player(int x, int y){
-    Lives = 3;
-    image.load(":/resources/player.png");
-    QRect ship;
-    ship = image.rect();
-    ship.moveTo(x,y);
+Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+{
+    setPixmap(QPixmap(":/images/images/player.png"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
 {
-
-    qDebug() << "MyRect knows that you pressed a key";
-    /*if(event->key() == Qt::Key_Left){
-        setPos(x()-10,y());
+    if(event->key() == Qt::Key_Left){
+        if(pos().x() > 0){
+            qDebug() << "key left was pressed";
+            setPos(x()-10,y());
+        }
     }
     else if(event->key() == Qt::Key_Right){
-        setPos(x()+10,y());
+        if(pos().x() + 100 < 800){
+            qDebug() << "key Right was pressed";
+            setPos(x()+10,y());
+        }
     }
     else if(event->key() == Qt::Key_Space){
-        Shoot();
-    }*/
+        qDebug() << "key Space was pressed";
+        Bullet * bullet = new Bullet();
+        bullet->setPos(x(),y());
+        scene() -> addItem(bullet);
+    }
 }
 
-QRect Player::getRect()
+void Player::spawn()
 {
-    ;
-}
-
-void Player::setRect(int, int, int, int)
-{
-    ;
-}
-
-void Player::Shoot(){
-    qDebug() << "anan";
+    //create an enemy
+    Enemy * enemy = new Enemy();
+    scene()->addItem(enemy);
 }

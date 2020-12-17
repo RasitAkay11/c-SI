@@ -1,37 +1,23 @@
 #ifndef GAME_H
 #define GAME_H
-#include <iostream>
-#include "players.h"
-#include "aliens.h"
 
-#include <QtGui/QKeyEvent>
+#include <QGraphicsView>
 #include <QWidget>
+#include <QGraphicsScene>
+#include "players.h"
+#include "score.h"
+#include "health.h"
 
-class Game : public QWidget{
-    Q_OBJECT
+class Game: public QGraphicsView{
 public:
-  Game(QWidget *parent = nullptr);
-  ~Game();
+    Game(QWidget * parent = 0);
 
-protected:
-    void paintEvent(QPaintEvent *event);
-    //void KeyPressEvent(QKeyEvent *Event);
-    void StartGame();
-    void StartGame(int);
-    void PauseGame();
-    void StopGame();
-private:
-    int x;
-    int Score;
-    int HighScore;
-    int timer;
-    bool NewHigh;
-    bool GameStarted;
-    bool GameOver;
-    bool GamePaused;
-    bool paused;
-    Aliens *aliens;
-    Player *player;
+    QGraphicsScene * scene;
+    Player * player;
+    Score * score;
+    Health * health;
 };
+
+
 
 #endif // GAME_H

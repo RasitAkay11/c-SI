@@ -1,128 +1,45 @@
 #include "game.h"
-#include "players.h"
-#include "aliens.h"
-#include "bart.h"
-#include "mikail.h"
-#include "osman.h"
+#include <QTimer>
+#include <QGraphicsTextItem>
+#include <QFont>
+#include "enemy.h"
+#include "QImage"
 
-#include <QPainter>
-#include <QtGui/QKeyEvent>
-#include <QApplication> ///The QApplication class manages the GUI application's control flow and main settings
+Game::Game(QWidget *parent){
+    // create the scene
+    scene = new QGraphicsScene();
+    scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
+    setBackgroundBrush(QBrush(QImage(":/images/images/Background.png")));
+
+    // make the newly created scene the scene to visualize (since Game is a QGraphicsView Widget,
+    // it can be used to visualize scenes)
+    setScene(scene);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setFixedSize(800,600);
+
+    // create the player
+    player = new Player();
+    //player->setPos(0,0,100,100); // change the rect from 0x0 (default) to 100x100 pixels
+    player->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+    // make the player focusable and set it to be the current focus
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
+    // add the player to the scene
+    scene->addItem(player);
+
+    // create the score/health
+    score = new Score();
+    scene->addItem(score);
+    health = new Health();
+    health->setPos(health->x(),health->y()+25);
+    scene->addItem(health);
 
 
-Game::Game(QWidget *parent) : QWidget(parent){
-    x = 0;
-    Score = 0;
-    HighScore = 0;
-    GamePaused = false;
-    GameStarted = false;
-    GameOver = false;
-}
+    // spawn enemies
+    QTimer * timer = new QTimer();
+    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
+    timer->start(2000);
 
-Game::~Game()
-{
-    ;
-}
-
-void Game::paintEvent(QPaintEvent *event) /* 56 : GUI */
-{
-    QPainter painter(this);
-
-    if (GameOver)
-    {
-        QFont font("Courier", 15, QFont::DemiBold);
-        QFontMetrics fm(font);
-        int textWidth = fm.width("Game Over");
-        painter.setFont(font);
-        int h = height();
-        int w = width();
-
-        painter.translate(QPoint(w/2, h/2));
-        painter.drawText(-textWidth/2, 0, "Game Over");
-
-        if (NewHigh == true)
-        {
-            int textWidth2 = fm.width("New High Score: ");
-            int textWidth3 = fm.width(QString::number(HighScore));
-
-            painter.drawText(-textWidth2/2, 20, "New High Score: ");
-            painter.drawText(-textWidth3/2, 40, QString::number(HighScore));
-        }
-        else
-        {
-            int textWidth2 = fm.width("Last Score: ");
-            int textWidth3 = fm.width(QString::number(Score));
-
-            painter.drawText(-textWidth2/2, 20, "Last Score: ");
-            painter.drawText(-textWidth3/2, 40, QString::number(Score));
-
-            int textWidth4 = fm.width("High Score: ");
-            int textWidth5 = fm.width(QString::number(HighScore));
-
-            painter.drawText(-textWidth4/2, 60, "High Score: ");
-            painter.drawText(-textWidth5/2, 80, QString::number(HighScore));
-        }
-    }
-    else
-    {
-        QFont font("Courier", 10, QFont::DemiBold);
-        int w = width();
-
-        painter.setFont(font);
-        painter.drawText(QPoint(w/2-35, 10), "Score: " + QString::number(Score));
-
-    }
-}
-
-/*void Game::KeyPressEvent(QKeyEvent *event)
-{
-    switch (event->key()) {
-    case Qt::Key_Left:///Key_Q:
-         player->dir = Player::LEFT;
-       break;
-    case Qt::Key_Right: ///Key_D:
-          player->dir = Player::RIGHT;
-        break;
-    case Qt::Key_P:
-          PauseGame();
-        break;
-    case Qt::Key_Space:
-          StartGame();
-        break;
-    case Qt::Key_Escape:
-          qApp->exit();
-        break;
-    default:
-        QWidget::keyPressEvent(event);
-    }
-    repaint();
-}
-*/
-void Game::StartGame(){
-    if(!GameStarted){
-        GameOver = false;
-        GamePaused = false;
-        Score = 0;
-        GameStarted = true;
-        timer = startTimer(5);
-    }
-}
-
-void Game::PauseGame(){
-    if(paused){
-        timer = startTimer(5);
-        paused = false;
-    } else{
-        paused = true;
-        killTimer(timer);
-    }
-}
-
-void Game::StopGame(){
-    killTimer(timer);
-    GameOver = true;
-    if(Score > HighScore){
-        HighScore = Score;
-    }
-    GameStarted = false;
+    show();
 }

@@ -1,11 +1,3 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
-        <file>resources/alien.png</file>
-        <file>resources/bullet.png</file>
-        <file>resources/player.png</file>
-        <file>resources/Background.png</file>
-        <file>resources/bart.jpg</file>
-        <file>resources/mikail.jpg</file>
-        <file>resources/osman.jpg</file>
-    </qresource>
+    <qresource prefix="/images"/>
 </RCC>

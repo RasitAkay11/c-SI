@@ -8,14 +8,13 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        aliens.cpp \
-        bart.cpp \
         bullet.cpp \
+        enemy.cpp \
         game.cpp \
+        health.cpp \
         main.cpp \
-        mikail.cpp \
-        osman.cpp \
-        players.cpp
+        players.cpp \
+        score.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -23,13 +22,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    aliens.h \
-    bart.h \
     bullet.h \
+    enemy.h \
     game.h \
-    mikail.h \
-    osman.h \
-    players.h
+    health.h \
+    players.h \
+    score.h
 
 RESOURCES += \
-    resources.qrc
+    res.qrc
