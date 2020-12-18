@@ -34,5 +34,6 @@ void Enemy::move()
         game->health->decrease();
         scene()->removeItem(this);
         delete this;
+        qDebug() << "Enemy removed to reduce memory";
     }
 }

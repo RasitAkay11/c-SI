@@ -29,6 +29,10 @@ void Bullet::move()
             //remove them both
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
+            invaderkilled = new QMediaPlayer();
+            invaderkilled->setMedia(QUrl("qrc:/sounds/sounds/invaderkilled.wav"));
+            invaderkilled->play();
+            qDebug() << "Invader killed!";
 
             //mem deleting
             delete colliding_items[i];
@@ -38,11 +42,12 @@ void Bullet::move()
     }
 
     //move bullet up
-    setPos(x(), y()-10);
+    setPos(x(), y()-15);
 
     //remove bullet after its off the screen to reduce memory
     if(pos().y() < 0){
         scene()->removeItem(this);
         delete this;
+        qDebug() << "Bullet removed to reduce memory.";
     }
 }

@@ -5,4 +5,10 @@
         <file>images/bullet.png</file>
         <file>images/player.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>sounds/invaderkilled.wav</file>
+        <file>sounds/shoot.wav</file>
+        <file>sounds/ufo_highpitch.wav</file>
+        <file>sounds/background.mp3</file>
+    </qresource>
 </RCC>
