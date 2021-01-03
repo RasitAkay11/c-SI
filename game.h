@@ -14,14 +14,13 @@ class Game: public QGraphicsView{
 public:
     Game(QWidget * parent = 0);
 
-    bool gamestarted;
-    bool gameover;
 
     QGraphicsScene * scene;
     Player * player;
     Enemy * enemy;
     Score * score;
     Health * health;
+    void gameover();
 };
 
 

@@ -2,13 +2,14 @@
 #define HEALTH_H
 
 #include <QGraphicsTextItem>
+#include <QDebug>
 
 class Health: public QGraphicsTextItem{
 public:
     Health(QGraphicsItem * parent=0);
     void decrease();
     int getHealth();
-private:
+//private:
     int health;
 };
 

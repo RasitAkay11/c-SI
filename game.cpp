@@ -6,6 +6,7 @@
 #include <QFont>
 #include <QMediaPlayer>
 
+extern Game * game;
 
 Game::Game(QWidget *parent){
     // create the scene
@@ -19,6 +20,7 @@ Game::Game(QWidget *parent){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(800,600);
+
 
     // create the player
     player = new Player();
@@ -49,4 +51,9 @@ Game::Game(QWidget *parent){
     music->play();
 
     show();
+}
+
+void Game::gameover()
+{
+
 }
