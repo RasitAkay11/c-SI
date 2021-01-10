@@ -4,11 +4,13 @@
         <file>images/Background.png</file>
         <file>images/bullet.png</file>
         <file>images/player.png</file>
+        <file>images/friend.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>sounds/invaderkilled.wav</file>
         <file>sounds/shoot.wav</file>
         <file>sounds/ufo_highpitch.wav</file>
         <file>sounds/background.mp3</file>
+        <file>sounds/explosion.wav</file>
     </qresource>
 </RCC>

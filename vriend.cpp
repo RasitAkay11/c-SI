@@ -1,4 +1,4 @@
-#include "enemy.h"
+#include "vriend.h"
 #include "game.h"
 #include <stdlib.h>
 #include <QTimer>
@@ -6,14 +6,14 @@
 using namespace SpaceInvaderz;
 extern Game * game;
 
-Enemy::Enemy(): QObject(), QGraphicsPixmapItem()
+Vriend::Vriend()
 {
     // set random position
-    unsigned __int16 rndmnr = rand() % 700; //27. Using best suited type everywhere
+    unsigned __int16 rndmnr = rand() % 700;
     setPos(rndmnr,0);
 
     //draw the player
-    setPixmap(QPixmap(":/images/images/alien.png")); //47.useful (modern) usage of file I/O
+    setPixmap(QPixmap(":/images/images/friend.png")); //47.useful (modern) usage of file I/O
     setTransformOriginPoint(50,50);
     setRotation(180);
 
@@ -23,18 +23,20 @@ Enemy::Enemy(): QObject(), QGraphicsPixmapItem()
     timer->start(50);
 }
 
-void Enemy::move()
+void Vriend::move()
 {
-    //move enemy down
-    setPos(x(), y()+6);
+    //move friend down
+    setPos(x(), y()+4);
 
-    //remove enemy after its off the screen to reduce memory. 26. Memory deleting
+    //remove friend after its off the screen to reduce memory. 26. Memory deleting
     if(pos().y() > 600)
     {
-        //decrease health
-        game->health->decreaseHealth();
+        for(unsigned __int8 i = 0; i < 2 ; i++) //26. unsigned char = unsigned int8
+        {
+        game->health->decreaseHealth(); //Player must shoot vriend down, or his health will decrease twice instead of increase once.
+        }
         scene()->removeItem(this); //15. useful usage of this
         delete this; //15. useful usage of this. 33. Dynamic memory removing(delete)
-        qDebug() << "Enemy removed to reduce memory";
+        qDebug() << "Friend removed to reduce memory";
     }
 }

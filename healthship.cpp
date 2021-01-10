@@ -1,15 +1,16 @@
+#include "healthship.h"
 #include "enemy.h"
 #include "game.h"
 #include <stdlib.h>
 #include <QTimer>
 #include <QGraphicsScene>
-using namespace SpaceInvaderz;
+
 extern Game * game;
 
-Enemy::Enemy(): QObject(), QGraphicsPixmapItem()
+Healthship::Healthship(QGraphicsItem *parent)
 {
     // set random position
-    unsigned __int16 rndmnr = rand() % 700; //27. Using best suited type everywhere
+    int rndmnr = rand() % 700;
     setPos(rndmnr,0);
 
     //draw the player
@@ -26,13 +27,13 @@ Enemy::Enemy(): QObject(), QGraphicsPixmapItem()
 void Enemy::move()
 {
     //move enemy down
-    setPos(x(), y()+6);
+    setPos(x(), y()+5);
 
     //remove enemy after its off the screen to reduce memory. 26. Memory deleting
     if(pos().y() > 600)
     {
         //decrease health
-        game->health->decreaseHealth();
+        game->health->setHealth();
         scene()->removeItem(this); //15. useful usage of this
         delete this; //15. useful usage of this. 33. Dynamic memory removing(delete)
         qDebug() << "Enemy removed to reduce memory";

@@ -1,16 +1,18 @@
 #include "game.h"
+#include "vriend.h"
 #include "enemy.h"
 #include "QImage"
 #include <QTimer>
 #include <QGraphicsTextItem>
 #include <QFont>
 #include <QMediaPlayer>
-
+#include "windows.h"
+using namespace SpaceInvaderz;
 extern Game * game;
 
-Game::Game(QWidget *parent){
+Game::Game(){
     // create the scene
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(); //32. Dynamic memory allocation(new)
     scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
     setBackgroundBrush(QBrush(QImage(":/images/images/Background.png")));
 
@@ -20,7 +22,6 @@ Game::Game(QWidget *parent){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(800,600);
-
 
     // create the player
     player = new Player();
@@ -33,27 +34,39 @@ Game::Game(QWidget *parent){
     scene->addItem(player);
 
     // create the score/health
-    score = new Score();
+    score = new Score(); //32. Dynamic memory allocation(new)
     scene->addItem(score);
-    health = new Health();
+    health = new Health(); //32. Dynamic memory allocation(new)
     health->setPos(health->x(),health->y()+25);
     scene->addItem(health);
 
 
     // spawn enemies
-    QTimer * timer = new QTimer();
-    QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawn()));
-    timer->start(2000);
+    QTimer * timerE = new QTimer(); //32. Dynamic memory allocation(new)
+    QObject::connect(timerE,SIGNAL(timeout()),player,SLOT(spawnE()));
+    timerE->start(2000);
+
+    // spawn vriend
+    QTimer * timerF = new QTimer(); //32. Dynamic memory allocation(new)
+    QObject::connect(timerF,SIGNAL(timeout()),player,SLOT(spawnF()));
+    timerF->start(30000);
 
     //play background music
-    QMediaPlayer * music = new QMediaPlayer();
-    music->setMedia(QUrl("qrc:/sounds/sounds/background.mp3"));
+    QMediaPlayer * music = new QMediaPlayer(); //32. Dynamic memory allocation(new)
+    music->setMedia(QUrl("qrc:/sounds/sounds/background.mp3"));//47.useful (modern) usage of file I/O
     music->play();
+    bool startgame = true;
+    if(startgame == true){
+        qDebug() << "\n!!!INSTRUCTIONS!!!\nUse your left and right arrow keys to move with your spaceship.\nUse space to shoot.\nKilling an enemy will increase your score while missing an enemy will decrease your health.\nKilling a friend will increase your health with one, while missing him will decrease it with 2.\nSucces player!\n ";
+    };
 
+    Sleep(10000);
     show();
+
 }
 
-void Game::gameover()
+Game::~Game()
 {
-
+    delete bullet;
+    delete enemy;
 }

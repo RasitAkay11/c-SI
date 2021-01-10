@@ -15,7 +15,8 @@ SOURCES += \
         health.cpp \
         main.cpp \
         players.cpp \
-        score.cpp
+        score.cpp \
+        vriend.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -28,7 +29,8 @@ HEADERS += \
     game.h \
     health.h \
     players.h \
-    score.h
+    score.h \
+    vriend.h
 
 RESOURCES += \
     res.qrc

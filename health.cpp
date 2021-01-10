@@ -1,30 +1,39 @@
 #include "health.h"
 #include "game.h"
+#include <windows.h>
 #include <QApplication>
 #include <QFont>
-
+using namespace SpaceInvaderz;
 
 Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
-    //initialize the score to zero
     health = 3;
-
     // draw score
     setPlainText(QString("Health: " + QString::number(health)));
     setDefaultTextColor(Qt::white);
     setFont(QFont("times,16"));
 }
 
-void Health::decrease()
+void Health::decreaseHealth()
 {
     health--;
     setPlainText(QString("Health: " + QString::number(health))); //updating text
-    if(health < 1){
-        QApplication::quit();
+    if(health < 1)
+    {
+        gameover();
     };
 }
 
-int Health::getHealth()
+void Health::increaseHealth()
 {
-    return health;
+    health++;
+    setPlainText(QString("Health: " + QString::number(health))); //updating text
+}
+
+void Health::gameover() //ending the game
+{
+    gameOver = true;
+    qDebug() << "Game over bro.. Window will close in 5 seconds.";
+    Sleep(5000);
+    QApplication::quit();
 }
