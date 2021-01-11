@@ -11,7 +11,8 @@
 #include "enemy.h"
 #include "bullet.h"
 
-namespace SpaceInvaderz{//23. everything in one of more selfmade namespaces
+namespace SpaceInvaderz
+{//23. everything in one of more selfmade namespaces
 class Game: public QGraphicsView{//2. useful class, 4. inheritance, 37. usefill Qt class
     Q_OBJECT
 public:

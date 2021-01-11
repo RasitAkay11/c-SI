@@ -2,7 +2,8 @@
 #define SCORE_H
 #include <QGraphicsTextItem>
 
-namespace SpaceInvaderz{//23. everything in one of more selfmade namespaces
+namespace SpaceInvaderz
+{//23. everything in one of more selfmade namespaces
 class Score: public QGraphicsTextItem{//2. useful class, 4. inheritance, 37. usefill Qt class
 public:
     Score(QGraphicsItem * parent = nullptr); //12. specific constructor. 46. Useful usage of nullptr

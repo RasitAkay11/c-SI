@@ -5,7 +5,8 @@
 #include <QObject>
 #include <QMediaPlayer>
 
-namespace SpaceInvaderz{ //23. everything in one of more selfmade namespaces
+namespace SpaceInvaderz
+{ //23. everything in one of more selfmade namespaces
 class Bullet: public QObject, public QGraphicsPixmapItem{//2. useful class, 6. meerdere inheritance, 37. usefull Qt class
     Q_OBJECT
 public:

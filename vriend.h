@@ -5,7 +5,8 @@
 #include <QObject>
 #include <QGraphicsItem>
 
-namespace SpaceInvaderz{//23. everything in one of more selfmade namespaces
+namespace SpaceInvaderz
+{//23. everything in one of more selfmade namespaces
 class Vriend: public Enemy{//2. useful class, 6. inheritance, 37. usefill Qt class
     Q_OBJECT
 public:

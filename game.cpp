@@ -10,7 +10,8 @@
 using namespace SpaceInvaderz;
 extern Game * game;
 
-Game::Game(){
+Game::Game()
+{
     // create the scene
     scene = new QGraphicsScene(); //32. Dynamic memory allocation(new)
     scene->setSceneRect(0,0,800,600); // make the scene 800x600 instead of infinity by infinity (default)
@@ -56,13 +57,12 @@ Game::Game(){
     music->setMedia(QUrl("qrc:/sounds/sounds/background.mp3"));//47.useful (modern) usage of file I/O
     music->play();
     bool startgame = true;
-    if(startgame == true){
-        qDebug() << "\n!!!INSTRUCTIONS!!!\nUse your left and right arrow keys to move with your spaceship.\nUse space to shoot.\nKilling an enemy will increase your score while missing an enemy will decrease your health.\nKilling a friend will increase your health with one, while missing him will decrease it with 2.\nSucces player!\n ";
+    if(startgame == true)
+    {
+        qDebug() << "\n!!!INSTRUCTIONS!!!\nUse your left and right arrow keys to move with your spaceship.\nUse space to shoot.\nKilling an enemy will increase your score while missing an enemy will decrease your health.\nKilling a friend will increase your health with one, while missing him will decrease it with 2.\nSucces player!\nGame will start over 10 seconds.\n ";
     };
-
     Sleep(10000);
     show();
-
 }
 
 Game::~Game()
